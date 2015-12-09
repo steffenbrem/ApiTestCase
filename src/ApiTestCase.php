@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -36,10 +37,21 @@ abstract class ApiTestCase extends WebTestCase
      */
     protected $entityManager;
 
+    /**
+     * @var Kernel
+     */
+    static protected $sharedKernel;
+
+    public static function setUpBeforeClass()
+    {
+        static::$sharedKernel = static::createKernel();
+        static::$sharedKernel->boot();
+    }
+
     public function setUp()
     {
         $this->client = static::createClient();
-        $this->entityManager = $this->get('doctrine.orm.entity_manager');
+        $this->entityManager = static::$sharedKernel->getContainer()->get('doctrine.orm.entity_manager');
     }
 
     public function tearDown()
