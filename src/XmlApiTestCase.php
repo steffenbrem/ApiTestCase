@@ -63,7 +63,7 @@ abstract class XmlApiTestCase extends ApiTestCase
      */
     private function assertXmlResponseContent(Response $actualResponse, $filename)
     {
-        parent::assertResponseContent($this->prettifyXml($actualResponse->getContent()), $filename, 'xml');
+        parent::assertResponseContent($this->prettifyXml($actualResponse->getContent()), $filename, MediaTypes::getType(MediaTypes::XML));
     }
 
     /**

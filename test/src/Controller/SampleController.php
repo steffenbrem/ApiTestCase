@@ -35,7 +35,7 @@ class SampleController extends Controller
     {
         $acceptFormat = $request->headers->get('Accept');
 
-        if ('application/json' === $acceptFormat) {
+        if (MediaTypes::JSON === $acceptFormat) {
             return new JsonResponse(['message' => 'Hello ApiTestCase World!']);
         }
 
@@ -57,7 +57,7 @@ class SampleController extends Controller
         $acceptFormat = $request->headers->get('Accept');
         $content = $this->get('app.third_party_api_client')->getInventory();
 
-        if ('application/json' === $acceptFormat) {
+        if (MediaTypes::JSON === $acceptFormat) {
             return new JsonResponse($content);
         }
 
@@ -110,8 +110,8 @@ class SampleController extends Controller
         $serializer = $this->createSerializer();
         $acceptFormat = $request->headers->get('Accept');
 
-        if ('application/xml' === $acceptFormat) {
-            $content = $serializer->serialize($data, 'xml');
+        if (MediaTypes::XML === $acceptFormat) {
+            $content = $serializer->serialize($data, MediaTypes::getType(MediaTypes::XML));
 
             $response = new Response($content);
             $response->headers->set('Content-Type', MediaTypes::XML);
@@ -119,8 +119,8 @@ class SampleController extends Controller
             return $response;
         }
 
-        if ('application/json' === $acceptFormat) {
-            $content = $serializer->serialize($data, 'json');
+        if (MediaTypes::JSON === $acceptFormat) {
+            $content = $serializer->serialize($data, MediaTypes::getType(MediaTypes::JSON));
             $response = new Response($content);
             $response->headers->set('Content-Type', MediaTypes::JSON);
 
