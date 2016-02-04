@@ -1,5 +1,5 @@
 {
-    "name": "lakion/api-test-case",
+    "name": "steffenbrem/api-test-case",
     "description": "Perfect PHPUnit TestCase for JSON/XML API TDD with Symfony.",
     "keywords": ["TDD", "Symfony2", "symfony", "TestCase", "PHPUnit", "doctrine", "api", "json", "xml"],
     "type": "library",
