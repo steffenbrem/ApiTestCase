@@ -40,6 +40,9 @@
         "symfony/console": "^2.3|^3.0",
         "symfony/serializer": "^2.3|^3.0"
     },
+    "replace": {
+        "lakion/api-test-case": "self.version"
+    },
     "config": {
         "bin-dir": "bin"
     },
